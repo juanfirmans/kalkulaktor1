@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        #result {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 60px;
+            height: 40px;
+            font-size: 18px;
+            margin: 5px;
+        }
+
+        button {
+            width: 60px;
+            height: 40px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #notification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            display: none;
+        }
+    </style>
+    <script>
+        function calculate(operator) {
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var result;
+
+            switch (operator) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+                    result = num1 / num2;
+                    break;
+            }
+
+            document.getElementById('result').innerText = result;
+            
+            // Show notification
+            var notification = document.getElementById('notification');
+            notification.innerText = 'Hasil: ' + result;
+            notification.style.backgroundColor = '#4CAF50';
+            notification.style.display = 'block';
+
+            // Hide notification after 3 seconds
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function clearInput() {
+            document.getElementById('num1').value = '';
+            document.getElementById('num2').value = '';
+            document.getElementById('result').innerText = '';
+        }
+    </script>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="num1" placeholder="Angka 1">
+    <input type="text" id="num2" placeholder="Angka 2">
+    <br>
+    <button onclick="calculate('add')">+</button>
+    <button onclick="calculate('subtract')">-</button>
+    <button onclick="calculate('multiply')">*</button>
+    <button onclick="calculate('divide')">/</button>
+    <button onclick="clearInput()">C</button>
+    <br>
+    <div id="result"></div>
+</div>
+
+<div id="notification"></div>
+
+</body>
+</html>
